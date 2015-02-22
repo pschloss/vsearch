@@ -183,8 +183,6 @@ void LinearMemoryAligner::diff(long a_start,
                                bool b_left,      /* includes left end of b  */
                                bool b_right)     /* includes right end of b */
 {
-  long MaxScore = 0;
-
   if (b_len == 0)
     {
       /* B and possibly A is empty */
@@ -460,7 +458,6 @@ void LinearMemoryAligner::diff(long a_start,
       
       long P;
       long best;
-      MaxScore = MAX(MaxScore0, MaxScore1);
 
       if (MaxScore0 > MaxScore1)
         {
