@@ -52,14 +52,14 @@ static int query_lineno;
 static int query_stripped_count;
 static int query_stripped[256];
 
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
 static BZFILE * bz_query_fp;
 static int bz_error;
 static char bz_buffer[LINEALLOC];
 static long bz_buffer_len = 0;
 #endif
 
-#ifdef HAVE_ZLIB
+#ifdef HAVE_ZLIB_H
 gzFile gz_query_fp;
 #endif
 
@@ -83,7 +83,7 @@ static char * FGETS(char * query_line, int size)
        (void) fgets(query_line, size, query_fp);
        break;
      case FORMAT_BZIP:
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
        bz_fgets(query_line, size, bz_query_fp, size,
                 &bz_error, bz_buffer, &bz_buffer_len);
 #else
@@ -91,7 +91,7 @@ static char * FGETS(char * query_line, int size)
 #endif
        break;
      case FORMAT_GZIP:
-#ifdef HAVE_ZLIB
+#ifdef HAVE_ZLIB_H
        gzgets(gz_query_fp, query_line, size);
        break;
 #else
@@ -145,7 +145,7 @@ void query_open(const char * filename)
   
   rewind(query_fp);
 
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
   /* open appropriate data steam if input file was compressed with bzip */
   if (query_format == FORMAT_BZIP)
    {
@@ -155,7 +155,7 @@ void query_open(const char * filename)
        fatal("Error: Unable to open query file (%s)", filename);
    }
 #endif
-#ifdef HAVE_ZLIB
+#ifdef HAVE_ZLIB_H
   if (query_format == FORMAT_GZIP)
    {
      fclose(query_fp);
@@ -196,11 +196,11 @@ void query_close()
         }
     }
 
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
   if (query_format == FORMAT_BZIP)
     BZ2_bzReadClose(&bz_error, bz_query_fp);
 #endif
-#ifdef HAVE_ZLIB
+#ifdef HAVE_ZLIB_H
   if (query_format == FORMAT_GZIP)
     gzclose(gz_query_fp);
 #endif
