@@ -1,2 +1,2 @@
-AUTOMAKE_OPTIONS = foreign nostdinc
+AUTOMAKE_OPTIONS = foreign
 SUBDIRS = src man

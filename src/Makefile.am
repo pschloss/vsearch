@@ -11,7 +11,7 @@ vsearch_SOURCES = cityhash/city.cc \
 	dbindex.h derep.h maps.h mask.h minheap.h msa.h query.h results.h \
 	search.h searchcore.h showalign.h shuffle.h sortbylength.h \
 	sortbysize.h unique.h userfields.h util.h vsearch.h \
-	allpairs.h linmemalign.h string.h
+	allpairs.h linmemalign.h xstring.h
 
 vsearch_CXXFLAGS = -I${srcdir}/cityhash @WARN@ @PROFILING@
 vsearch_LDADD = libcpu_ssse3.a libcpu_sse2.a

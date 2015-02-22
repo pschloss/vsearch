@@ -60,7 +60,7 @@
 #endif
 
 #include "util.h"
-#include "string.h"
+#include "xstring.h"
 #include "align_simd.h"
 #include "maps.h"
 #include "arch.h"

@@ -3,9 +3,9 @@
 
 AC_PREREQ([2.67])
 AC_INIT([vsearch], [1.1.1], [torognes@ifi.uio.no])
-AM_INIT_AUTOMAKE([nostdinc subdir-objects])
+AM_INIT_AUTOMAKE([subdir-objects])
 AC_CONFIG_SRCDIR([src/vsearch.cc])
-AC_CONFIG_HEADERS([src/config.h])
+AC_CONFIG_HEADERS([config.h])
 
 WARN="-Wall -Wsign-compare"
 PROFILING="-g"
@@ -31,7 +31,7 @@ AC_TYPE_UINT32_T
 # Checks for library functions.
 AC_FUNC_MALLOC
 AC_FUNC_STRTOD
-AC_CHECK_FUNCS([memmove memcpy])
+AC_CHECK_FUNCS([memmove memcpy posix_memalign])
 
 
 have_pthreads=no
