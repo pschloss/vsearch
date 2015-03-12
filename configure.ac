@@ -48,6 +48,17 @@ AS_IF([test "x$enable_zlib" != "xno"], [
   AC_SEARCH_LIBS([gzoffset], [z], [have_zlib=yes])
 ])
 
+have_ps2pdf=no
+AC_ARG_ENABLE(pdfman, AS_HELP_STRING([--disable-pdfman], [Disable PDF manual creation]))
+AS_IF([test "x$enable_pdfman" != "xno"], [
+  have_ps2pdf=yes
+  AC_CHECK_PROG(HAVE_PS2PDF, ps2pdf, yes, no)
+  if test "x$HAVE_PS2PDF" = "xno"; then
+    AC_MSG_WARN([*** ps2pdf is required to build a PDF version of the manual])
+    have_ps2pdf=no
+  fi
+])
+
 if test "x${have_pthreads}" = "xyes"; then
   AC_CHECK_HEADERS([pthread.h], [], [have_pthreads=no])
 fi
@@ -63,6 +74,7 @@ fi
 AM_CONDITIONAL(HAVE_BZLIB, test "x${have_bzip2}" = "xyes")
 AM_CONDITIONAL(HAVE_ZLIB, test "x${have_zlib}" = "xyes")
 AM_CONDITIONAL(HAVE_PTHREADS, test "x${have_pthreads}" = "xyes")
+AM_CONDITIONAL(HAVE_PS2PDF, test "x${have_ps2pdf}" = "xyes")
 AM_PROG_CC_C_O
 
 

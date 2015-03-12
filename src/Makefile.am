@@ -1,6 +1,6 @@
-bin_PROGRAMS = vsearch
+bin_PROGRAMS = $(top_builddir)/bin/vsearch
 
-vsearch_SOURCES = cityhash/city.cc \
+__top_builddir__bin_vsearch_SOURCES = cityhash/city.cc \
 	align.cc align_simd.cc arch.cc bitmap.cc chimera.cc cluster.cc\
 	db.cc dbindex.cc derep.cc maps.cc mask.cc minheap.cc msa.cc \
 	query.cc results.cc search.cc searchcore.cc showalign.cc shuffle.cc \
@@ -13,8 +13,8 @@ vsearch_SOURCES = cityhash/city.cc \
 	sortbysize.h unique.h userfields.h util.h vsearch.h \
 	allpairs.h linmemalign.h xstring.h
 
-vsearch_CXXFLAGS = -I${srcdir}/cityhash @WARN@ @PROFILING@
-vsearch_LDADD = libcpu_ssse3.a libcpu_sse2.a
+__top_builddir__bin_vsearch_CXXFLAGS = -I${srcdir}/cityhash @WARN@ @PROFILING@
+__top_builddir__bin_vsearch_LDADD = libcpu_ssse3.a libcpu_sse2.a
 noinst_LIBRARIES = libcpu_ssse3.a libcpu_sse2.a
 libcpu_ssse3_a_SOURCES = cpu.cc
 libcpu_ssse3_a_CXXFLAGS = -mssse3 -DSSSE3 -I${srcdir}/cityhash @WARN@ @PROFILING@
