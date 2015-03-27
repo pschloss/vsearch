@@ -93,7 +93,7 @@
 #define PROG_VERSION "v"VERSION
 #else
 #define PROG_NAME "vsearch"
-#define PROG_VERSION "v1.1.1"
+#define PROG_VERSION "v1.1.4"
 #endif
 
 #ifdef __APPLE__
