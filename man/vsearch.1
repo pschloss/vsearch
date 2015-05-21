@@ -1,5 +1,6 @@
+'\" -*- coding: utf-8 -*-
 .\" ============================================================================
-.TH vsearch 1 "March 18, 2015" "version 1.1.3" "USER COMMANDS"
+.TH vsearch 1 "March 18, 2015" "version 1.1.4" "USER COMMANDS"
 .\" ============================================================================
 .SH NAME
 vsearch \(em chimera detection, clustering, dereplication, masking, pairwise alignment, searching, shuffling and sorting of amplicons from metagenomic projects.
@@ -1428,7 +1429,7 @@ only sequences with an abundance equal to or greater than 2:
 .\" 
 .\" ============================================================================
 .SH AUTHORS
-Implementation by Torbjørn Rognes and Tomás Flouri, documentation by Frédéric Mahé.
+Implementation by Torbjørn Rognes and Tomáš Flouri, documentation by Frédéric Mahé.
 .\" ============================================================================
 .SH REPORTING BUGS
 Submit suggestions and bug-reports at
@@ -1568,7 +1569,8 @@ memory leak.  Also increased line buffer for reading FASTA files to
 Fix a bug where the multiple alignment and consensus sequence computed
 after clustering ignored the strand of the sequences.  Also decreased
 size of line buffer for reading FASTA files to 1MB again due to
-excessive stack memory usage.
+excessive stack memory usage. This version and future versions should
+respect the rules of semantic versioning.
 .TP
 .BR v1.0.15\~ "released February 18th, 2015"
 Fix bug in calculation of identity metric between sequences when using
@@ -1591,6 +1593,9 @@ Fix bug with large datasets. Fix format of help info.
 .TP
 .BR v1.1.3\~ "released March 18th, 2015"
 Fix more bugs with large datasets.
+.TP
+.BR v1.1.4\~ "released March 19th, 2015"
+Minor code changes to remove warnings.
 .LP
 .\" ============================================================================
 .\" TODO:

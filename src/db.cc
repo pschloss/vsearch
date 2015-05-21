@@ -39,7 +39,7 @@ static char * datap = 0;
 regex_t db_regexp;
 
 static int db_format = FORMAT_PLAIN;
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
 static int bz_error;
 static char bz_buffer[LINEALLOC];
 static long bz_buffer_len = 0;
@@ -51,10 +51,10 @@ void db_read(const char * filename, int upcase)
     fatal("Regular expression compilation failed");
   
   FILE * fp = NULL;
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
   BZFILE * bz_fp = NULL;
 #endif
-#ifdef HAVE_ZLIB
+#ifdef HAVE_ZLIB_H
   gzFile gz_fp = NULL;
 #endif
 
@@ -85,7 +85,7 @@ void db_read(const char * filename, int upcase)
   (void) asprintf(& prompt, "Reading file %s", filename);
   progress_init(prompt, filesize);
 
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
   /* open appropriate data steam if input file was compressed with bzip */
   if (db_format == FORMAT_BZIP)
    {
@@ -95,7 +95,7 @@ void db_read(const char * filename, int upcase)
          fatal("Error: Unable to open query file (%s)", filename);
    }
 #endif
-#ifdef HAVE_ZLIB
+#ifdef HAVE_ZLIB_H
   if (db_format == FORMAT_GZIP)
    {
      fclose(fp);
@@ -127,7 +127,7 @@ void db_read(const char * filename, int upcase)
        (void) fgets(line, LINEALLOC, fp);
        break;
      case FORMAT_BZIP:
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
        bz_fgets(line, LINEALLOC, bz_fp, LINEALLOC,
                 &bz_error, bz_buffer, &bz_buffer_len);
        break;
@@ -136,7 +136,7 @@ void db_read(const char * filename, int upcase)
              "compiled with BZLIB support", PROG_NAME);
 #endif
      case FORMAT_GZIP:
-#ifdef HAVE_ZLIB
+#ifdef HAVE_ZLIB_H
        gzgets(gz_fp, line, LINEALLOC);
        break;
 #else
@@ -211,7 +211,7 @@ void db_read(const char * filename, int upcase)
            (void) fgets(line, LINEALLOC, fp);
            break;
          case FORMAT_BZIP:
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
            bz_fgets(line, LINEALLOC, bz_fp, LINEALLOC,
                     &bz_error, bz_buffer, &bz_buffer_len);
            break;
@@ -220,7 +220,7 @@ void db_read(const char * filename, int upcase)
                  "compiled with BZLIB support", PROG_NAME);
 #endif
          case FORMAT_GZIP:
-#ifdef HAVE_ZLIB
+#ifdef HAVE_ZLIB_H
            gzgets(gz_fp, line, LINEALLOC);
            break;
 #else
@@ -300,7 +300,7 @@ void db_read(const char * filename, int upcase)
                (void) fgets(line, LINEALLOC, fp);
                break;
              case FORMAT_BZIP:
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
                bz_fgets(line, LINEALLOC, bz_fp, LINEALLOC,
                         &bz_error, bz_buffer, &bz_buffer_len);
                break;
@@ -309,7 +309,7 @@ void db_read(const char * filename, int upcase)
                      "compiled with BZLIB support", PROG_NAME);
 #endif
              case FORMAT_GZIP:
-#ifdef HAVE_ZLIB
+#ifdef HAVE_ZLIB_H
                gzgets(gz_fp, line, LINEALLOC);
                break;
 #else
@@ -368,7 +368,7 @@ void db_read(const char * filename, int upcase)
 
           sequences++;
         }
-#ifdef HAVE_ZLIB
+#ifdef HAVE_ZLIB_H
       if (db_format == FORMAT_GZIP)
         progress_update(gzoffset(gz_fp));
       else
@@ -377,11 +377,11 @@ void db_read(const char * filename, int upcase)
     }
 
   /* close the database file */
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
   if (db_format == FORMAT_BZIP)
     BZ2_bzReadClose(&bz_error, bz_fp);
 #endif
-#ifdef HAVE_ZLIB
+#ifdef HAVE_ZLIB_H
   if (db_format == FORMAT_GZIP)
     gzclose(gz_fp);
 #endif

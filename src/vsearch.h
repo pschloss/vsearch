@@ -47,16 +47,20 @@
 
 #include <city.h>
 
-#ifdef HAVE_ZLIB
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+#ifdef HAVE_ZLIB_H
 #include <zlib.h>
 #endif
 
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
 #include <bzlib.h>
 #endif
 
 #include "util.h"
-#include "string.h"
+#include "xstring.h"
 #include "align_simd.h"
 #include "maps.h"
 #include "arch.h"
@@ -84,8 +88,13 @@
 #include "cpu.h"
 #include "allpairs.h"
 
+#ifdef HAVE_CONFIG_H
+#define PROG_NAME PACKAGE
+#define PROG_VERSION "v"VERSION
+#else
 #define PROG_NAME "vsearch"
-#define PROG_VERSION "v1.1.3"
+#define PROG_VERSION "v1.1.4"
+#endif
 
 #ifdef __APPLE__
 #define PROG_ARCH "osx_x86_64"
@@ -93,7 +102,7 @@
 #define PROG_ARCH "linux_x86_64"
 #endif
 
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
 #define BZ_VERBOSE_0 0
 #define BZ_VERBOSE_1 1
 #define BZ_VERBOSE_2 2

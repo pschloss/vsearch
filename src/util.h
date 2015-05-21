@@ -47,7 +47,7 @@ void progress_done();
 
 int detect_compress_format (const char * filename);
 
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
 char * bz_fgets (char * s, int size, BZFILE * stream, long linealloc,
                  int * bz_error_ptr, char * buf_internal, long * buf_internal_len);
 #endif

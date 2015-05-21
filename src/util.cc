@@ -27,10 +27,10 @@ static unsigned long progress_size;
 static unsigned long progress_chunk;
 static const unsigned long progress_granularity = 200;
 
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
 static unsigned char magic_bzip[] = "\x42\x5a";
 #endif
-#ifdef HAVE_ZLIB
+#ifdef HAVE_ZLIB_H
 static unsigned char magic_gzip[] = "\x1f\x8b";
 #endif
 
@@ -110,7 +110,7 @@ void  __attribute__((noreturn)) fatal(const char * format,
 void * xmalloc(size_t size)
 {
   const size_t alignment = 16;
-  void * t;
+  void * t = NULL;
   (void) posix_memalign(& t, alignment, size);
   if (t==0)
     fatal("Unable to allocate enough memory.");
@@ -216,7 +216,7 @@ void reverse_complement(char * rc, char * seq, long len)
   rc[len] = 0;
 }
 
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
 char * bz_fgets (char * s, int size, BZFILE * stream, long linealloc,
                  int * bz_error_ptr, char * buf_internal, long * buf_internal_len_ptr)
 {
@@ -263,11 +263,11 @@ int detect_compress_format (const char * filename)
   fclose(fp);
   if (cnt < 2) return (0); 
 
-#ifdef HAVE_BZLIB
+#ifdef HAVE_BZLIB_H
   if (!memcmp(magic, magic_bzip, 2)) return FORMAT_BZIP;
 #endif
 
-#ifdef HAVE_ZLIB
+#ifdef HAVE_ZLIB_H
   if (!memcmp(magic, magic_gzip, 2)) return FORMAT_GZIP;
 #endif
 
